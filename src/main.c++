@@ -1,30 +1,25 @@
-#include "../includes/GreyScale.h"
+// #include "../includes/GreyScale.h"
 
-using namespace std;
+// using namespace std;
 
-int main() {
-    string filename;
-    cin >> filename;
+// int main() {
+//     string filename;
+//     cin >> filename;
 
-    if (!(filename.rfind(".ppm") || filename.rfind(".pnm"))) {
-        std::cout << "ERROR: Bad extension. File read failed. Aborting.." << endl;
-        return 1;
-    }
+//     if (!(filename.rfind(".ppm") || filename.rfind(".pnm"))) {
+//         std::cout << "ERROR: Bad extension. File read failed. Aborting.." << endl;
+//         return 1;
+//     }
 
-    cout << "Hello" << endl;
-
-    GreyScale ppm_file(filename);
-
-    cout << "Hello" << endl;
+//     GreyScale ppm_file(filename);
     
-    ppm_file.read();
+//     if (! ppm_file.read()) {
+//         cout << "ERROR: Wrong File path. Aborting.." << endl;
+//         return 1;
+//     }
 
-    cout << "Hello" << endl;
+//     ppm_file.modify();
 
-    ppm_file.modify();
-
-    cout << "Hello" << endl;
-
-    cout << "File written successfully" << endl;
-    return 0;
-}
+//     cout << "File written successfully" << endl;
+//     return 0;
+// }
