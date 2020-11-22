@@ -1,25 +1,49 @@
-// #include "../includes/GreyScale.h"
-
+// #include <bits/stdc++.h>
+// #include <iostream>
+// // #include "FileReader.h"
+// #include "../includes/TXT_File.h"
+//
 // using namespace std;
-
-// int main() {
+//
+// int main(){
+//     //taking fileName from the user
 //     string filename;
-//     cin >> filename;
-
-//     if (!(filename.rfind(".ppm") || filename.rfind(".pnm"))) {
-//         std::cout << "ERROR: Bad extension. File read failed. Aborting.." << endl;
-//         return 1;
+//     cin>>filename;
+//
+//     //assign output filename
+//     string outputfile;
+//     outputfile = "Documentstatic-"+filename;
+//
+//     vector<string> format;
+//
+//     stringstream s(filename);
+//     string sub;
+//
+//     while(getline(s,sub,'.')){
+//         format.push_back(sub);
 //     }
-
-//     GreyScale ppm_file(filename);
-    
-//     if (! ppm_file.read()) {
-//         cout << "ERROR: Wrong File path. Aborting.." << endl;
-//         return 1;
+//
+//     int n=format.size();
+//
+//     if(format[n-1]=="txt"){
+//         //making class object
+//         FileReader f(filename);
+//         //to process input file
+//         f.read();
+//         //to write in outputfile
+//         f.write(outputfile);
+//
+//         //printing on terminal
+//         cout<<f.getNumLines()<<" "<<f.getNumWords()<<" "<<f.getNumCharSpace()<<" "<<f.getNumChar()<<" "<<f.getBytes()<<endl;
 //     }
-
-//     ppm_file.modify();
-
-//     cout << "File written successfully" << endl;
+//
+//     else if(format[n-1] == "csv"){
+//         //make obj and calls
+//     }
+//
+//     else if(format[n-1] == "ppm"){
+//         //make obj and calls
+//     }
+//
 //     return 0;
 // }
