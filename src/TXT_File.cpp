@@ -49,7 +49,7 @@ int TXT_File::countSubWords(string word){
     return count;
 }
 
-//to count no of words {between two spaces}
+//to count no of words {between two spaces} (ligature and diacritic not included)
 int TXT_File::countWords(string line){
     int flag=0;
     //using stringstream to take input form string
@@ -82,6 +82,7 @@ int TXT_File::countChars(string line){
         ch=line[i];
         numchar_nounicode++;
         if(flag==0){
+            // to check if any char unicode char is present (char uses replacement-char in txt file)
             if((ch & 0xC0) != 0x80)
                 numChar++;
             if(isspace(ch)){
