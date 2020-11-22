@@ -24,7 +24,7 @@ private:
     int countChars(string line);
 
 public:
-    TXT_File(string fileName, string outputfile);
+    TXT_File(string fileName);
     //driver function to process file
     bool read();
     //function to write in outputfile

@@ -5,14 +5,14 @@
 using namespace std;
 
 int main(){
-    //taking fileName from the user
-    string fileName,filename_Withpath,outputfile;
-    cin>>fileName;
-    //assign output fileName
+    //taking filename from the user
+    string filename;
+    cin>>filename;
+    //assign output filename
 
     vector<string> format;
 
-    stringstream s(fileName);
+    stringstream s(filename);
     string sub;
 
     while(getline(s,sub,'.')){
@@ -22,11 +22,9 @@ int main(){
     int n=format.size();
 
     if(format[n-1]=="txt"){
-        filename_Withpath = "../Test_files/Text_files/"+fileName;
-        outputfile = "../Output_files/Text_files/new-"+fileName;
 
         //making class object
-        TXT_File f(filename_Withpath, outputfile);
+        TXT_File f(filename);
         //to process input file
         f.read();
         //to write in outputfile
@@ -42,7 +40,7 @@ int main(){
     // }
     //
     // else if(format[n-1] == "ppm"){
-    //     GreyScale ppm_file(filename_Withpath);
+    //     GreyScale ppm_file(filename);
     //
     //     if (! ppm_file.read()) {
     //         cout << "ERROR: Wrong File path. Aborting.." << endl;

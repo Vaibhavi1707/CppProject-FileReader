@@ -1,9 +1,10 @@
 #include "../includes/TXT_File.h"
 
 //defining constructor
-TXT_File::TXT_File (string fname, string outputFile){
-    filename = fname;
-    this->outputfile = outputFile;
+TXT_File::TXT_File (string fname){
+
+    filename = "../Test_files/Text_files/"+fname;
+    outputfile = "../Output_files/Text_files/new-"+fname;
 
     numChar=0;
     numWords=0;
