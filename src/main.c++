@@ -45,7 +45,7 @@ int main(){
             string outputfile = "Documentstatic-"+filename;
 
             //making class object
-            TXT_File f(filename, outputfile);
+            TXT_File f(filename);
             //to process input file
             f.read();
             //to write in outputfile

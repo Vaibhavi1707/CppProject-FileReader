@@ -6,10 +6,10 @@
 #include"../includes/CSV_File.h"
 #include<fstream>
 using namespace std;
-int CSV_File::countDelimeters(char c[], string input)
+int CSV_File::countDelimeters(string c, string input)
 {
-	int count = 0, constant = strlen(c);
-	char* p = strstr(input, c);
+	int count = 0, constant = c.length();
+	char* p = strstr(input, c); // What do you want to do in this function?
 	string k = input;
 	while (p != NULL)
 	{
@@ -27,7 +27,7 @@ int CSV_File::fill()
 	char c[] = ",";
 	ifstream in(fileName);
 	// FILE* F = fopen(fileName, "r");
-	char line[10000];
+	string line;
 	if (!in.is_open())
 	{
 		printf("FILE CANNOT BE OPENED!!\n");
@@ -37,11 +37,13 @@ int CSV_File::fill()
 	{
 		do
 		{
-			fscanf(F, "\n%[^\n]\n", line);
-			char x[100], * line1 = line;
+			getline(in, line);
+			char x[100]; 
+			string line1 = line;
 			vector < string > segment;
 			for (int i = 0; i < col; i++)
 			{
+				// What do you want to do in this block?
 				if (i != col - 1)
 					sscanf(line1, "%[^,],", x);
 				else
@@ -57,10 +59,10 @@ int CSV_File::fill()
 	return 1;
 }
 
-int CSV_File::GetColumnNumber(char name[])
+int CSV_File::GetColumnNumber(string name)
 {
 	int number = 0;
-	int pow = 1, l = strlen(name);
+	int pow = 1, l = name.length();
 
 	for (int i = l - 1; i >= 0; i--)
 	{

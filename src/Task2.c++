@@ -110,7 +110,7 @@ bool ppm:: write()
     }
     fout.close(); 
     // I added the cout line to check whether it's able to write or not.
-    cout << "Hello World" << endl;
+    // cout << "Hello World" << endl;
    return false;
     //   fout.close();  
 }

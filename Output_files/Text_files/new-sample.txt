@@ -1,4 +1,13 @@
 
+
+Lines - 5669
+Words - 30172
+Characters (with spaces) - 162328
+Characters (no spaces) - 131722
+Bytes - 162328
+
+
+
 Project Gutenberg’s Romeo and Juliet, by William Shakespeare
 
 This eBook is for the use of anyone anywhere in the United States and

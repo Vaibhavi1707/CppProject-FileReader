@@ -19,9 +19,9 @@ public:
       row = getNoOfRows();
       col = getNoOfCols();
     }
-    int countDelimeters(char c[], char input[]);
+    int countDelimeters(string c, string input);
     int fill();
-    int GetColumnNumber(char name[]);
+    int GetColumnNumber(string name);
     int getNoOfRows();
     int getNoOfCols();
     static bool isFloat(string myString);

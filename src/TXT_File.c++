@@ -1,9 +1,10 @@
 #include "../includes/TXT_File.h"
 
 //defining constructor
-TXT_File::TXT_File (string fname, string outputFile){
-    filename = fname;
-    this->outputfile = outputFile;
+TXT_File::TXT_File (string fname){
+
+    filename = "../Test_files/Text_files/"+fname;
+    outputfile = "../Output_files/Text_files/new-"+fname;
 
     numChar=0;
     numWords=0;
@@ -48,7 +49,7 @@ int TXT_File::countSubWords(string word){
     return count;
 }
 
-//to count no of words {between two spaces}
+//to count no of words {between two spaces} (ligature and diacritic not included)
 int TXT_File::countWords(string line){
     int flag=0;
     //using stringstream to take input form string
@@ -81,6 +82,7 @@ int TXT_File::countChars(string line){
         ch=line[i];
         numchar_nounicode++;
         if(flag==0){
+            // to check if any char unicode char is present (char uses replacement-char in txt file)
             if((ch & 0xC0) != 0x80)
                 numChar++;
             if(isspace(ch)){
