@@ -1,34 +1,29 @@
+#ifndef CSV_FILE_H_
+#define CSV_FILE_H_
+
 #include"File.h"
 #include<vector>
 #include <string>
 #include<string.h>
 
 using namespace std;
+
+
 class CSV_File : public File
 {
 protected:
     int row, col;
     vector < vector <string> >  arr;
-    string fileName;
-    char output[100];
+    string fileName, output;
 public:
     CSV_File(string file)
     {
-      fileName = file;
-      strcpy(output,"output.csv");
-      row = getNoOfRows();
-      col = getNoOfCols();
+        fileName = file;
+        output = "output.csv";
     }
-    int countDelimeters(string c, string input);
-    int fill();
-    int GetColumnNumber(string name);
-    int getNoOfRows();
-    int getNoOfCols();
     static bool isFloat(string myString);
-    //int fillMetaData();
     bool read();
-    virtual void modify() = 0;
     bool write();
-    //virtual bool compareVector(vector <string> i1, vector <string> i2)=0;
-}; 
+};
 
+#endif

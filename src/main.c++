@@ -2,8 +2,8 @@
 #include "../includes/Task4.h"
 #include "../includes/Task7.h"
 #include "../includes/Task2.h"
-#include"../includes/CSVSort.h"
-#include "../includes/task3.h"
+#include"../includes/Task8.h"
+#include "../includes/Task3.h"
 
 using namespace std;
 
@@ -14,6 +14,19 @@ using namespace std;
 #define YELLOW "\033[1;33m"
 #define CYAN "\033[1;36m"
 #define MAGENTA "\033[1;35m"
+
+int GetColumnNumber(string name)
+{
+    int number = 0;
+    int pow = 1, l = name.length();
+
+    for (int i = l - 1; i >= 0; i--)
+    {
+        number += (name[i] - 'A' + 1) * pow;
+        pow *= 26;
+    }
+    return number;
+}
 
 string get_extension(string filename) {
     vector<string> format;
@@ -29,7 +42,7 @@ string get_extension(string filename) {
 }
 
 void csv_transpose(string filename) {
-    csvFile file_csv;
+    Task3 file_csv;
 
     fstream *file_input = new fstream();
 
@@ -64,7 +77,7 @@ void csv_transpose(string filename) {
                 }
         }
 
-        csvFile file(Matrix);
+        Task3 file(Matrix);
 
     file_csv = file;
 
@@ -186,7 +199,6 @@ void txt_reader(string filename) {
     //printing on terminal
     cout << YELLOW;
     // cout<<"Lines"<<f.getNumLines()<<" "<<f.getNumWords()<<" "<<f.getNumCharSpace()<<" "<<f.getNumChar()<<" "<<f.getBytes()<<endl;
-    cout << RESET;
 
     cout<<"Lines - "<<f.getNumLines()<<endl;
     cout<<"Words - "<<f.getNumWords()<<endl;
@@ -219,9 +231,12 @@ int main(){
         else if(extension == "csv"){
             cout << YELLOW << "You've entered a csv file" << endl;
             cout << "Please enter 1 for sorting columns in a csv file" << endl;
-            cout << "Please enter 2 for converting ppm file to a pgm file" << RESET << endl;
+            cout << "Please enter 2 for transpose." << RESET << endl;
+
+            cout << MAGENTA;
             int choice;
             cin >> choice;
+            cout << RESET;
 
             if (choice == 1) {
                 cout << YELLOW << "Enter the columns" << endl;
@@ -230,6 +245,10 @@ int main(){
                 cin >> c1;
                 cout << YELLOW << "Coloumn 2: " << RESET << endl;
                 cin >> c2;
+                Task8 c (filename, GetColumnNumber(c1) - 1, GetColumnNumber(c2) - 1);
+                c.read();
+                c.modify();
+                c.write();
             }
 
             else if (choice == 2) {
@@ -247,8 +266,10 @@ int main(){
             cout << "Please enter 1 for converting rgb ppm file to brg ppm file" << endl;
             cout << "Please enter 2 for converting ppm file to a pgm file" << RESET << endl;
 
+            cout << MAGENTA;
             int choice;
             cin >> choice;
+            cout << RESET;
 
             if (choice == 1) {
                 if (ppm_to_brg(filename)) {
