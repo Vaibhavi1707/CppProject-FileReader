@@ -88,7 +88,7 @@ bool PPM_File::read() {
 }
 
 bool PPM_File::write() {
-    ofstream grey_scale_file(this->_filename.substr(0, this->_filename.length() - 3) + ".pgm");
+    ofstream grey_scale_file(this->_filename.substr(0, this->_filename.length() - 4) + ".pgm");
 
     int max_grey_val = *max_element(content.begin(), content.end());
 

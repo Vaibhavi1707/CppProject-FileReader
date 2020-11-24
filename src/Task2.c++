@@ -54,6 +54,7 @@ bool ppm:: read()
         version=ver;
         setversion(version);
         input>>width;
+        cout << width;
         setwidth(width);
         input>>height;
         setheight(height);
@@ -90,6 +91,7 @@ bool ppm:: read()
 bool ppm:: write()
 {
    std::ofstream fout(this->file_name);
+   cout << width << " " << height << " " << maxcolor << endl;
    if (!fout.fail())
    {
       fout<<"P3\n";

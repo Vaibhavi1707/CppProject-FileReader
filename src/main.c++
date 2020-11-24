@@ -3,6 +3,7 @@
 #include "../includes/GreyScale.h"
 #include "../includes/brg.h"
 #include"../includes/CSVSort.h"
+#include "../includes/csvFile.h"
 
 using namespace std;
 
@@ -27,6 +28,167 @@ string get_extension(string filename) {
     return format[format.size() - 1];
 }
 
+void csv_transpose(string filename) {
+    csvFile file_csv;
+
+    fstream *file_input = new fstream();
+
+    string line;
+        string word;	
+
+    int i = 0;
+
+        vector<vector<string>> Matrix;
+        vector<vector<string>> TranspMatrix;
+
+        file_input->open(filename);
+
+        if(file_input->is_open())
+    {
+                while ( !file_input->eof() ) 
+        {
+                        vector<string> rows;
+                        Matrix.push_back(rows);
+                        
+            vector<string> strng;
+                        TranspMatrix.push_back(strng);
+                        
+            getline(*file_input, line);
+                        stringstream get(line);
+                        
+            while (getline(get, word,',')) 
+            {
+                                Matrix[i].push_back(word);
+                        }
+                        i++;
+                }
+        }
+
+        csvFile file(Matrix);
+
+    file_csv = file;
+
+    vector<vector<string>> TransposeTable;
+
+        int maximum = file_csv.getMatrix()[0].size();
+
+        int temp = 0;
+
+        i = 0;
+
+        while(i < file_csv.getMatrix().size())
+        {
+
+                temp = file_csv.getMatrix()[i].size();
+
+                if(maximum < temp)
+                {
+                        maximum = temp;
+                }
+                i = i + 1;
+        }
+
+        int j = 0;
+
+        while(j < maximum)
+        {
+                vector<string> str;
+                TransposeTable.push_back(str);
+                j = j + 1;
+        }
+
+        int k = 0;
+        int l = 0;
+
+        while(k < file_csv.getMatrix().size())
+        {
+                l = 0;
+
+                while(l < file_csv.getMatrix()[k].size())
+                {
+                        TransposeTable[l].push_back(file_csv.getMatrix()[k][l]);
+                        l = l + 1;
+                }
+                k = k + 1;
+        }
+
+        file_csv.setTransMatrix(TransposeTable);
+
+    fstream file_output;
+
+        file_output.open("transposeFile.csv",ios::app | ios::out);
+
+        i = 0;
+        j = 0;
+
+        while(i < file_csv.getTransMatrix().size())
+        {
+                j = 0;
+                while(j < file_csv.getTransMatrix()[i].size()){
+
+                        if(j == file_csv.getTransMatrix()[i].size()-1)
+                        {
+                                file_output<<file_csv.getTransMatrix()[i][j];
+                                j = j + 1;
+                        }
+
+                        else
+                        {
+                                file_output<<file_csv.getTransMatrix()[i][j]<<",";
+                                j = j + 1;
+                        }
+                }
+
+                if(i == file_csv.getTransMatrix().size()-1)
+                {
+                        i = i + 1;
+                        continue;
+                }
+
+                else
+                {
+                        file_output << "\n";
+                }
+
+                i = i + 1;
+        }
+}
+
+bool ppm_to_brg(string filename) {
+    ppm p(filename);
+    if (p.read()) {
+        p.write();
+        return true;
+    }
+    return false;
+}
+
+bool ppm_to_pgm(string filename) {
+    GreyScale ppm_file(filename);
+
+    if (! ppm_file.read()) {
+        return false;
+    }
+
+    ppm_file.modify();
+    return true;
+}
+
+void txt_reader(string filename) {
+    string outputfile = "Documentstatic-"+filename;
+    //making class object
+    TXT_File f(filename);
+    //to process input file
+    f.read();
+    //to write in outputfile
+    f.write();
+
+    //printing on terminal
+    cout << YELLOW;
+    cout<<f.getNumLines()<<" "<<f.getNumWords()<<" "<<f.getNumCharSpace()<<" "<<f.getNumChar()<<" "<<f.getBytes()<<endl;
+    cout << RESET;
+}
+
 int main(){
     bool over = false;
 
@@ -42,18 +204,7 @@ int main(){
         string extension = get_extension(filename);
 
         if(extension == "txt") {
-            string outputfile = "Documentstatic-"+filename;
-
-            //making class object
-            TXT_File f(filename);
-            //to process input file
-            f.read();
-            //to write in outputfile
-            f.write();
-
-            //printing on terminal
-            cout<<f.getNumLines()<<" "<<f.getNumWords()<<" "<<f.getNumCharSpace()<<" "<<f.getNumChar()<<" "<<f.getBytes()<<endl;
-            return 0;
+            txt_reader(filename);
         }
 
         else if(extension == "csv"){
@@ -69,16 +220,14 @@ int main(){
                 string c1, c2;
                 cin >> c1;
                 cout << YELLOW << "Coloumn 2: " << RESET << endl;
-                CSVSort c(filename,c.GetColumnNumber(c1) - 1,c.GetColumnNumber(c2) - 1);
-                c.read();
-                c.modify();
-                c.write();
+                cin >> c2;
             }
 
             else if (choice == 2) {
-
-            }
-
+                csv_transpose(filename);
+                cout << GREEN << "File written successfully" << RESET << endl;
+            } 
+            
             else {
                 cout << RED << "ERROR: Wrong choice. Aborting.." << RESET << endl;
             }
@@ -93,40 +242,32 @@ int main(){
             cin >> choice;
 
             if (choice == 1) {
-                ppm p(filename);
-                if (p.read()) {
-                    p.write();
+                if (ppm_to_brg(filename)) {
                     cout << GREEN << "File written successfully" << RESET << endl;
                 } else {
                     cout << RED << "ERROR: Bad file format. Aborting.." << RESET << endl;
                 }
-            }
-
+            } 
+            
             else if (choice == 2) {
-                GreyScale ppm_file(filename);
-
-                if (! ppm_file.read()) {
-                    cout << RED << "ERROR: Bad file format. Aborting.." << RESET << endl; // red
+                if (ppm_to_pgm(filename)) {
+                    cout << GREEN << "File written successfully" << RESET << endl;
+                } else {
+                    cout << RED << "ERROR: Bad file format. Aborting.." << RESET << endl;
                 }
-
-                ppm_file.modify();
-
-                cout << GREEN << "File written successfully" << RESET << endl;
-            }
-
-            else {
+            } else {
                 cout << RED << "ERROR: Wrong choice. Aborting.." << RESET << endl;
             }
-        }
-
-        else {
+        } else {
             cout << RED << "ERROR: Bad extension. File read failed. Aborting.." << RESET << endl;
         }
 
-        cout << "To continue enter yes" << endl;
+        cout << YELLOW << "To continue enter yes" << RESET << endl;
 
+        cout << MAGENTA;
         string to_continue;
         cin >> to_continue;
+        cout << RESET;
 
         transform(to_continue.begin(), to_continue.end(), to_continue.begin(), ::tolower);
         over = to_continue != "yes";
