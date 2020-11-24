@@ -7,7 +7,7 @@ using namespace std;
 #define FileReader_H
 
 //declaring class FileReader
-class TXT_File : public File {
+class Task4 : public File {
 private:
     //declaring variables
     int numLines,numWords,numSpace,numChar,bytes,numchar_nounicode;
@@ -24,7 +24,7 @@ private:
     int countChars(string line);
 
 public:
-    TXT_File(string fileName);
+    Task4(string fileName);
     //driver function to process file
     bool read();
     //function to write in outputfile

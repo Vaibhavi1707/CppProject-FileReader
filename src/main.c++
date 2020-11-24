@@ -1,9 +1,9 @@
 #include <bits/stdc++.h>
-#include "../includes/TXT_File.h"
-#include "../includes/GreyScale.h"
-#include "../includes/brg.h"
+#include "../includes/Task4.h"
+#include "../includes/Task7.h"
+#include "../includes/Task2.h"
 #include"../includes/CSVSort.h"
-#include "../includes/csvFile.h"
+#include "../includes/task3.h"
 
 using namespace std;
 
@@ -34,7 +34,7 @@ void csv_transpose(string filename) {
     fstream *file_input = new fstream();
 
     string line;
-        string word;	
+        string word;
 
     int i = 0;
 
@@ -45,18 +45,18 @@ void csv_transpose(string filename) {
 
         if(file_input->is_open())
     {
-                while ( !file_input->eof() ) 
+                while ( !file_input->eof() )
         {
                         vector<string> rows;
                         Matrix.push_back(rows);
-                        
+
             vector<string> strng;
                         TranspMatrix.push_back(strng);
-                        
+
             getline(*file_input, line);
                         stringstream get(line);
-                        
-            while (getline(get, word,',')) 
+
+            while (getline(get, word,','))
             {
                                 Matrix[i].push_back(word);
                         }
@@ -155,7 +155,7 @@ void csv_transpose(string filename) {
 }
 
 bool ppm_to_brg(string filename) {
-    ppm p(filename);
+    Task2 p(filename);
     if (p.read()) {
         p.write();
         return true;
@@ -164,7 +164,7 @@ bool ppm_to_brg(string filename) {
 }
 
 bool ppm_to_pgm(string filename) {
-    GreyScale ppm_file(filename);
+    Task7 ppm_file(filename);
 
     if (! ppm_file.read()) {
         return false;
@@ -177,7 +177,7 @@ bool ppm_to_pgm(string filename) {
 void txt_reader(string filename) {
     string outputfile = "Documentstatic-"+filename;
     //making class object
-    TXT_File f(filename);
+    Task4 f(filename);
     //to process input file
     f.read();
     //to write in outputfile
@@ -185,8 +185,17 @@ void txt_reader(string filename) {
 
     //printing on terminal
     cout << YELLOW;
-    cout<<f.getNumLines()<<" "<<f.getNumWords()<<" "<<f.getNumCharSpace()<<" "<<f.getNumChar()<<" "<<f.getBytes()<<endl;
+    // cout<<"Lines"<<f.getNumLines()<<" "<<f.getNumWords()<<" "<<f.getNumCharSpace()<<" "<<f.getNumChar()<<" "<<f.getBytes()<<endl;
     cout << RESET;
+
+    cout<<"Lines - "<<f.getNumLines()<<endl;
+    cout<<"Words - "<<f.getNumWords()<<endl;
+    cout<<"Characters (with spaces) - "<<f.getNumCharSpace()<<endl;
+    cout<<"Characters (no spaces) - "<<f.getNumChar()<<endl;
+    cout<<"Bytes - "<<f.getBytes()<<endl;
+
+    cout << RESET;
+
 }
 
 int main(){
@@ -226,8 +235,8 @@ int main(){
             else if (choice == 2) {
                 csv_transpose(filename);
                 cout << GREEN << "File written successfully" << RESET << endl;
-            } 
-            
+            }
+
             else {
                 cout << RED << "ERROR: Wrong choice. Aborting.." << RESET << endl;
             }
@@ -247,8 +256,8 @@ int main(){
                 } else {
                     cout << RED << "ERROR: Bad file format. Aborting.." << RESET << endl;
                 }
-            } 
-            
+            }
+
             else if (choice == 2) {
                 if (ppm_to_pgm(filename)) {
                     cout << GREEN << "File written successfully" << RESET << endl;

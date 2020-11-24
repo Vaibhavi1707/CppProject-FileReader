@@ -8,30 +8,37 @@ struct RGB{
     int g;
     int b;
 };
-class ppm:public File{
+class Task2:public File{
 
     private:
       int width;
       int height;
-    public:
-      ppm(std::string file_name);
+
       std::string file_name;
       std::string version;
-      int maxcolor; 
-      void setwidth(int w);
-      int getheight();
-      void setheight(int h);
-      int getwidth();
-      void setversion(std::string s);
-      std::string getversion();
-      void setmaxcolor(int c);
-      friend void read(std::string file_name,ppm &p);
+      std::string output_file;
+      int maxcolor;
       RGB **image;
+
+    public:
+      Task2(std::string fname);
+      Task2(const Task2 &p);
+
+      void setwidth(int w);
+      void setheight(int h);
+      void setversion(std::string s);
+      void setmaxcolor(int c);
+      void setimage(RGB **im);
+      friend void read(std::string file_name,Task2 &p);
+
+      int getheight();
+      int getwidth();
+
+      std::string getversion();
+
       bool write();
       bool read();
-      void setimage(RGB **im);
-      
-      ppm(const ppm &p);
+
 
 };
 #endif

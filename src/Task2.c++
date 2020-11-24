@@ -1,48 +1,51 @@
-//#include "ppm.h"
 #include<string.h>
 #include<fstream>
-#include "../includes/brg.h"
-ppm::ppm(std::string file_name)
+#include "../includes/Task2.h"
+
+Task2::Task2(std::string fname)
 {
+    file_name = "../Test_files/Task2_files/"+fname;
+    output_file = "../Output_files/Task2_files/new-"+fname;
+
     this->file_name=file_name;
 }
-ppm::ppm(const ppm &p)
+Task2::Task2(const Task2 &p)
 {
     this->file_name=p.file_name;
 }
-void ppm:: setwidth(int w)
+void Task2:: setwidth(int w)
 {
     width=w;
 }
-void ppm::setheight(int h)
+void Task2::setheight(int h)
 {
     height=h;
 }
-int ppm::getheight()
+int Task2::getheight()
 {
     return height;
 }
-int ppm::getwidth()
+int Task2::getwidth()
 {
     return width;
 }
-void ppm::setmaxcolor(int c)
+void Task2::setmaxcolor(int c)
 {
     maxcolor=c;
 }
-void ppm::setversion(std::string s)
+void Task2::setversion(std::string s)
 {
     version=s;
 }
-std::string ppm::getversion()
+std::string Task2::getversion()
 {
     return version;
 }
-void ppm:: setimage(RGB **im)
+void Task2:: setimage(RGB **im)
 {
     image=im;
 }
-bool ppm:: read()
+bool Task2:: read()
 {
     ifstream input(this->file_name);
     int color,i,j,width,height,color1;
@@ -86,11 +89,11 @@ bool ppm:: read()
         input.close();
         return true;
     }
-   return false;  
+   return false;
 }
-bool ppm:: write()
+bool Task2:: write()
 {
-   std::ofstream fout(this->file_name);
+   std::ofstream fout(this->output_file);
    cout << width << " " << height << " " << maxcolor << endl;
    if (!fout.fail())
    {
@@ -110,9 +113,9 @@ bool ppm:: write()
       }
     return true;
     }
-    fout.close(); 
+    fout.close();
     // I added the cout line to check whether it's able to write or not.
     // cout << "Hello World" << endl;
    return false;
-    //   fout.close();  
+    //   fout.close();
 }

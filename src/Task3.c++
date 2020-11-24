@@ -1,17 +1,17 @@
-#include"../includes/csvFile.h"
+#include"../includes/Task3.h"
 
-csvFile :: csvFile(vector<vector<string>> Table)
+Task3 :: Task3(vector<vector<string>> Table)
 {
 
 	setMatrix(Table);
 
 }
 
-void csvFile :: setMatrix(vector<vector<string>> Table)
+void Task3 :: setMatrix(vector<vector<string>> Table)
 {
 	int i = 0;
 	int size = Table.size();
-	
+
 	while(i < size)
 	{
         	Matrix.push_back(Table[i]);
@@ -20,14 +20,14 @@ void csvFile :: setMatrix(vector<vector<string>> Table)
 
 }
 
-vector<vector<string>> csvFile :: getMatrix()
+vector<vector<string>> Task3 :: getMatrix()
 {
 
     return Matrix;
 
 }
 
-void csvFile :: setTransMatrix(vector<vector<string>> Table)
+void Task3 :: setTransMatrix(vector<vector<string>> Table)
 {
 
         int i = 0;
@@ -42,7 +42,7 @@ void csvFile :: setTransMatrix(vector<vector<string>> Table)
 }
 
 
-vector<vector<string>> csvFile :: getTransMatrix()
+vector<vector<string>> Task3 :: getTransMatrix()
 {
 
     	return TransMatrix;

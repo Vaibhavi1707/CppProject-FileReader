@@ -38,7 +38,7 @@ int CSV_File::fill()
 		do
 		{
 			getline(in, line);
-			char x[100]; 
+			char x[100];
 			string line1 = line;
 			vector < string > segment;
 			for (int i = 0; i < col; i++)

@@ -1,7 +1,7 @@
-#include "../includes/TXT_File.h"
+#include "../includes/Task4.h"
 
 //defining constructor
-TXT_File::TXT_File (string fname){
+Task4::Task4 (string fname){
 
     filename = "../Test_files/Text_files/"+fname;
     outputfile = "../Output_files/Text_files/new-"+fname;
@@ -15,7 +15,7 @@ TXT_File::TXT_File (string fname){
 }
 
 //to count subwords in words with non alpha-numeric char
-int TXT_File::countSubWords(string word){
+int Task4::countSubWords(string word){
 
     word = word+'.';
     int flag,count=0;
@@ -50,7 +50,7 @@ int TXT_File::countSubWords(string word){
 }
 
 //to count no of words {between two spaces} (ligature and diacritic not included)
-int TXT_File::countWords(string line){
+int Task4::countWords(string line){
     int flag=0;
     //using stringstream to take input form string
     stringstream s(line);
@@ -74,7 +74,7 @@ int TXT_File::countWords(string line){
 }
 
 //count no of chars(without space) and spaces in line
-int TXT_File::countChars(string line){
+int Task4::countChars(string line){
     char ch;
     int flag=0;
 
@@ -96,7 +96,7 @@ int TXT_File::countChars(string line){
 }
 
 //driver function
-bool TXT_File::read(){
+bool Task4::read(){
     string line;
     fin.open(filename);
     //reading whole file
@@ -108,12 +108,12 @@ bool TXT_File::read(){
     fin.close();
 }
 
-// void TXT_File::write(string content_to_write, int size){
+// void Task4::write(string content_to_write, int size){
 //     int x;
 // }
 
 //writing in outputfile
-bool TXT_File::write(){
+bool Task4::write(){
     string line;
 
     fout.open(outputfile,ios::out);
@@ -139,8 +139,8 @@ bool TXT_File::write(){
     fout.close();
 }
 
-int TXT_File::getNumWords(){ return numWords; }
-int TXT_File::getNumLines(){ return numLines; }
-int TXT_File::getNumCharSpace(){ return numSpace+numChar+numLines-1; }
-int TXT_File::getNumChar(){ return numChar; }
-int TXT_File::getBytes(){ return numSpace+numchar_nounicode+numLines-1; }
+int Task4::getNumWords(){ return numWords; }
+int Task4::getNumLines(){ return numLines; }
+int Task4::getNumCharSpace(){ return numSpace+numChar+numLines-1; }
+int Task4::getNumChar(){ return numChar; }
+int Task4::getBytes(){ return numSpace+numchar_nounicode+numLines-1; }
