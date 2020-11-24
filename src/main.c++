@@ -54,6 +54,8 @@ void csv_transpose(string filename) {
         vector<vector<string>> Matrix;
         vector<vector<string>> TranspMatrix;
 
+        string outputfile = "new-"+filename;
+        filename = "../Test_files/csv_files/"+filename ;
         file_input->open(filename);
 
         if(file_input->is_open())
@@ -129,7 +131,7 @@ void csv_transpose(string filename) {
 
     fstream file_output;
 
-        file_output.open("transposeFile.csv",ios::app | ios::out);
+        file_output.open("../Output_files/csv_files/"+outputfile,ios::app | ios::out);
 
         i = 0;
         j = 0;

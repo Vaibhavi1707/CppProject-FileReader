@@ -6,18 +6,18 @@ vector <string> split(string s, char delimiter) {
     vector <string> words;
     stringstream s_stream(s);
 
-    for (string word; s_stream >> word;) { 
+    for (string word; s_stream >> word;) {
         words.push_back(word);
-        if (s_stream.peek() == delimiter) 
-            s_stream.ignore(); 
+        if (s_stream.peek() == delimiter)
+            s_stream.ignore();
     }
 
-    return words; 
+    return words;
 }
 
 vector <string> parse_content(ifstream& ppm_file) {
     vector <string> content;
-    
+
     while (ppm_file) {
         string line;
         getline(ppm_file, line);
@@ -41,11 +41,11 @@ bool PPM_File::extract_header(vector <string>& content) {
    if (this->_magic_no != "P3") {
        return false;
    }
-   
+
    this->_width = stoi(content[1]);
    this->_height = stoi(content[2]);
    this->_max_color_val = stoi(content[3]);
-   
+
    return true;
 }
 
